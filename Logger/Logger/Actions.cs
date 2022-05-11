@@ -2,51 +2,62 @@
 {
     public class Actions
     {
-        Starter starter = new Starter();
+
+        WriteMethod writeMethod = new WriteMethod();
+        Result objectResult = new Result();
+        Logger logger = new Logger();
 
         string str = string.Empty;
 
+        public void WriteInConsole(string str)
+        {
+
+            writeMethod.WriteText(str);
+            writeMethod.Save();
+            Console.WriteLine(str);
+
+        }
+
+        public void Status(bool status)
+        {
+            if (status == true)
+            {
+                objectResult.MessageError = string.Empty;
+            }
+            else if (status == false)
+            {
+                objectResult.MessageError = "I broke a logic";
+            }
+        }
+
         public Result StartMethod()
         {
-            Result objectResult = new Result(true);
-
-            var massageError = Logger.TypeOfSmth.Info;
-
+            Status(objectResult.Status);
+            var massageError = LogType.LogTypes.Info;
             str = $"{DateTime.Now:H:mm:ss} {massageError}";
-            starter.WriteText(str);
-            starter.Save();
+            WriteInConsole(str);
 
-            Console.WriteLine(str);
             return objectResult;
         }
 
         public Result SkippedLogicInMethod()
         {
-            Result objectResult = new Result(true);
-
-            var massageError = Logger.TypeOfSmth.Warning;
-
+            Status(objectResult.Status);
+            var massageError = LogType.LogTypes.Warning;
             str = $"{DateTime.Now:H:mm:ss} {massageError}";
-            starter.WriteText(str);
-            starter.Save();
+            WriteInConsole(str);
 
-            Console.WriteLine(str);
             return objectResult;
         }
 
         public Result Method()
         {
-            Result objectResult = new Result(false);
-            Logger logger = new Logger();
-
-            var resultMassage = logger.MassageLogger + objectResult.MassageError;
-            var massageError = Logger.TypeOfSmth.Error;
-
+            Status(objectResult.Status = false);
+            var resultMassage = logger.MessageLogger + objectResult.MessageError;
+            var massageError = LogType.LogTypes.Error;
             str = $"{DateTime.Now:H:mm:ss} {massageError} {resultMassage}";
-            starter.WriteText(str);
-            starter.Save();
+            WriteInConsole(str);
 
-            Console.WriteLine(str);
             return objectResult;
         }
     }

@@ -2,17 +2,13 @@
 {
     public class Result
     {
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
 
-        public string MassageError { get; } = "I broke a logic";
+        public string MessageError { get; set; }
 
         public Result()
         {
         }
 
-        public Result(bool status)
-        {
-            Status = status;
-        }
     }
 }
